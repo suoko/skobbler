@@ -31,9 +31,10 @@
         Read about defer: https://developer.mozilla.org/Web/HTML/Element/script#attr-defer
         -->
         <script type="text/javascript" src="js/app.js" defer></script>
+        <script type="text/javascript" src="js/OpenLayers.js" ></script>
         <script type="text/javascript" src="js/leaflet.js"></script>
         <script type="text/javascript" src="js/skobbler.js"></script>
-
+        <script src="http://open.mapquestapi.com/sdk/js/v7.1.0/mqa.toolkit.js?key=Fmjtd%7Cluur20uy2g%2C2g%3Do5-9aya1w"></script>
         <!--
         The following two lines are for loading the localisations library
         and the localisation data-so people can use the app in their
@@ -53,8 +54,28 @@
         <button id="geolocation2" disabled>MapQuest</button>
         <br>
 
+        <!--<input type='text' id="myTextInput" value='e ora...' />
+        <button id='myButton'>Cliccami</button>-->
         
-        <div id="geolocation-display">Geolocation coords should show up here</div>
+<label class="pack-radio danger">
+  <input type="radio" id="skobbler" name="myradio" value="skobbler">
+  <span></span>
+</label>
+
+<label class="pack-radio danger">
+  <input type="radio" id="mapquest" name="myradio" value="mapquest">
+  <span></span>
+</label>
+        
+<label class="pack-radio danger">
+  <input type="radio" id="google" name="myradio" value="google">
+  <span></span>
+</label>
+        
+        <div id="geolocation-display">Geolocation coords should  up here</div>
         <div id='map' style='width:300px; height:300px;'></div>
+        <div><img id="image" src="" width="300" /></div>
+
+        
     </body>
 </html>

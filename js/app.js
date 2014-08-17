@@ -24,10 +24,11 @@ window.addEventListener('DOMContentLoaded', function() {
     // https://developer.mozilla.org/Web/API/Element.innerHTML#Security_considerations
     message.textContent = translate('message');
 
-  }
-  
 
-  
+
+  }
+
+
 
   // GEOLOCATION
 var geolocation = document.querySelector("#geolocation"),
@@ -38,14 +39,70 @@ navigator.geolocation.getCurrentPosition(function (position) {
 geolocationDisplay.innerHTML = "<strong>Latitude:</strong> " + position.coords.latitude + ", <strong>Longitude:</strong> " + position.coords.longitude;
 geolocationDisplay.style.display = "block";
 
+
+
+  
+if  (document.getElementById('google').checked) {
+
 // GOOGLE IMG
    /*var img = new Image();
     img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=300x300&sensor=false";
-    geolocationDisplay.appendChild(img);*/
+   document.getElementById('image').src = img.src;*/
+  /*geolocationDisplay.appendChild(img);*/ //NON SERVE 
+  
+var map = new OpenLayers.Map({
+        div: "map",
+        allOverlays: true
+    });
+
+    var osm = new OpenLayers.Layer.OSM();
+    var gmap = new OpenLayers.Layer.Google("Google Streets", {visibility: false});
+
+    // note that first layer must be visible
+    map.addLayers([osm, gmap]);
+
+    map.addControl(new OpenLayers.Control.LayerSwitcher());
+    map.zoomToMaxExtent();
+
+
+
+  
+  
+
+
+
+  
+
+}
+
+  
 // END OF GOOGLE IMG
 
 
+// MAPQUEST
+  
+else if  (document.getElementById('mapquest').checked) {
 
+ var options={
+          elt:document.getElementById('map'),        
+          zoom:13,                                   
+          latLng:{lat:43.0059, lng:12.6000},   
+          mtype:'osm'  
+	  };
+
+	      var map = new MQA.TileMap(options);
+        MQA.withModule('directions', function() {
+
+          map.addRoute([
+            {latLng: {lat:position.coords.latitude, lng:position.coords.longitude}},
+            {latLng: {lat:43.0059, lng:12.6000}}
+          ]);
+        });
+} 
+ 
+// FINE MAPQUEST
+  
+else if (document.getElementById('skobbler').checked) {  
 
 //  SKOBBLER
     var map = L.skobbler.map('map', {
@@ -78,19 +135,18 @@ geolocationDisplay.style.display = "block";
     }); 
 	 var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
    marker.bindPopup("This is where you are. And this is the area where you can get in 5 minutes by walking.", { offset: new L.Point(-1, -41) }).openPopup();
-
+ 
   //  END OF SKOBBLER
-  
+}
 },
 function () {
-geolocationDisplay3.innerHTML = "Failed to get your current location";
-geolocationDisplay3.style.display = "block";
+geolocationDisplay.innerHTML = "Failed to get your current location";
+geolocationDisplay.style.display = "block";
 });
 };
 }
 
 
-  
 
 
 });

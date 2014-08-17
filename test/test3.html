@@ -1,0 +1,38 @@
+<html>
+  <head>
+  <script>
+  function findSelection(field) {
+    var test = document.getElementsByName(field);
+    var sizes = test.length;
+
+    alert(sizes);
+        for (i=0; i < sizes; i++) {
+            if (test[i].checked==true) {
+            alert(test[i].value + ' you got a value');     
+            return test[i].value;
+        }
+    }
+}
+
+
+function submitForm() {
+
+    var genderS =  findSelection("genderS");
+    alert(genderS);
+    return false;
+}
+</script>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+  <form action="#" name="theForm" method="post">
+
+    <label for="gender">Gender: </label>
+    <input type="radio" name="genderS" value="1" checked> Male
+    <input type="radio" name="genderS" value="0" > Female<br><br>
+    <a href="" onclick="return submitForm();">Search</A>
+</form>
+  </body>
+</html>
